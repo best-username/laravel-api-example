@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:sanctum'])->group(function () {
+
+    Route::get('/books/mine', 'BookController@getByUser');
+    Route::get('/author/{author}/books', 'BookController@getByAuthor');
+    Route::apiResource('books', 'BookController');
+    
 });
 
 Route::post('/login', 'Auth\AuthController@login');

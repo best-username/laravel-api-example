@@ -55,7 +55,12 @@ class User extends Authenticatable
     
     public function authors()
     {
-        return $this->hasOne(Author::class, 'creator_id');
+        return $this->hasMany(Author::class, 'creator_id');
+    }
+    
+    public function books()
+    {
+        return $this->hasMany(Book::class, 'creator_id');
     }
     
 }

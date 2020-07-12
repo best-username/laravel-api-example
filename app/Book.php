@@ -3,12 +3,12 @@
 namespace App;
 
 use App\User;
+use App\Author;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Author extends Model
+class Book extends Model
 {
-    
     use SoftDeletes;
     
     /**
@@ -17,7 +17,7 @@ class Author extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'surname',
+        'name', 'pages', 'annotation', 'picture',
     ];
 
     /**
@@ -29,9 +29,18 @@ class Author extends Model
         return $this->belongsTo(User::class, 'creator_id');
     }
     
-    public function books()
+    public function author()
     {
-        return $this->hasMany(Book::class, 'author_id');
+        return $this->belongsTo(Author::class, 'author_id');
     }
     
+    /**
+     * Accessors
+     */
+    
+    public function getPictureAttribute($value)
+    {
+        $file_path = \Storage::url($value);
+        return asset($file_path);
+    }
 }
