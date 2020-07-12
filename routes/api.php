@@ -14,15 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum'])->group(function () {
+
+Route::group(['middleware' => ['jwt.auth']], function () {
 
     Route::get('/books/mine', 'BookController@getByUser');
-    Route::get('/author/{author}/books', 'BookController@getByAuthor');
     Route::apiResource('books', 'BookController');
     
 });
 
-Route::post('/login', 'Auth\AuthController@login');
-Route::post('/register', 'Auth\AuthController@register');
+Route::post('/login', 'JWTAuthController@login')->name('login');
+Route::post('/register', 'JWTAuthController@register');
 
 Route::apiResource('authors', 'AuthorController')->only(['index', 'show']);
+Route::apiResource('books', 'BookController')->only(['index', 'show']);
+Route::get('/author/{author}/books', 'BookController@getByAuthor');
