@@ -22,8 +22,8 @@ Route::group(['middleware' => ['jwt.auth']], function () {
     
 });
 
-Route::post('/login', 'JWTAuthController@login')->name('login');
-Route::post('/register', 'JWTAuthController@register');
+Route::post('/login', 'Auth\JWTAuthController@login')->name('login');
+Route::post('/register', 'Auth\JWTAuthController@register');
 
 Route::apiResource('authors', 'AuthorController')->only(['index', 'show']);
 Route::apiResource('books', 'BookController')->only(['index', 'show']);
