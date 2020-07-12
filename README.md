@@ -1,3 +1,26 @@
+## Install
+
+1. git clone git@github.com:best-username/laravel-api-example.git .
+2. cp .env.example .env
+3. add 
+UID=1000
+HOST_PORT=8080
+PMA_PORT=8081
+to .env
+4. change 
+DB_HOST=127.0.0.1
+to
+DB_HOST=mysql-db
+ and set DB_PASSWORD
+
+5. docker-compose build && docker-compose up -d
+6. docker exec -it laravel-app bash -c "sudo -u devuser /bin/bash"
+7. composer install
+8. php artisan key:generate
+9. php artisan jwt:secret
+10. php artisan migrate
+11. php artisan db:seed
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
